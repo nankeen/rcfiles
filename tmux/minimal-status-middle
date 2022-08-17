@@ -32,42 +32,10 @@ setw -g aggressive-resize on
 unbind-key r
 bind-key r source-file ~/.tmux.conf \; display-message "Reloaded config..."
 
-bind-key m previous-window
-bind-key M select-pane -m
-
-unbind-key ^A
-bind-key ^A select-pane -t :.+
-
 # Use tab to switch to last window
 bind-key Tab last-window
 
-# VIM pane cycling
-unbind-key h
-unbind-key j
-unbind-key k
-unbind-key l
-bind-key h select-pane -L
-bind-key j select-pane -D
-bind-key k select-pane -U
-bind-key l select-pane -R
-
-# Resize key binds
-unbind-key ^h
-unbind-key ^j
-unbind-key ^k
-unbind-key ^l
-bind-key ^h resize-pane -L 3
-bind-key ^j resize-pane -D 3
-bind-key ^k resize-pane -U 3
-bind-key ^l resize-pane -R 3
-
 bind -n F8 setw synchronize-panes
-
-# resize pane
-bind -r ^k resizep -U 10 # upward (prefix Ctrl+k)
-bind -r ^j resizep -D 10 # downward (prefix Ctrl+j)
-bind -r ^h resizep -L 10 # to the left (prefix Ctrl+h)
-bind -r ^l resizep -R 10 # to the right (prefix Ctrl+l)
 
 # swap pane
 
@@ -78,10 +46,10 @@ bind ^u swapp -U
 bind ^d swapp -D
 
 # Select the last pane (prefix e)
-bind e lastp
+bind f lastp
 
 # Select the last window (prefix Ctrl+e)
-bind ^e last
+bind ^f last
 
 # Kill pane (prefix q)
 bind q killp
