@@ -21,12 +21,10 @@ noremap j e|noremap J E
 " Switch tabs.
 nnoremap <C-i> <C-PageDown>|nnoremap <C-h> <C-PageUp>
 " Switch panes.
-noremap H <C-w>h|noremap I <C-w>l|noremap N <C-w>j|noremap E <C-w>k
+noremap M <C-w>h|noremap I <C-w>l|noremap N <C-w>j|noremap E <C-w>k
 " Moving windows around.
-noremap <C-w>N <C-w>J|noremap <C-w>E <C-w>K|noremap <C-w>I <C-w>L
+noremap <C-w>M <C-w>H|noremap <C-w>N <C-w>J|noremap <C-w>E <C-w>K|noremap <C-w>I <C-w>L
 " High/Low/Mid. Note that <C-m> is equivalent to the enter key.
 noremap <C-e> H|noremap <C-n> L|noremap <C-m> M
 " Scroll up/down.
 noremap zn <C-y>|noremap ze <C-e>
-" Back and forth in jumplist and changelist.
-nnoremap gh <C-o>|nnoremap gi <C-i>|nnoremap gH g;|nnoremap gI g,
