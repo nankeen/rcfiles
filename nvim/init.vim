@@ -134,6 +134,9 @@ nnoremap <leader>r <Plug>(coc-rename)
 xnoremap <leader>f <Plug>(coc-format)
 nnoremap <leader>f <Plug>(coc-format)
 
+" Use <CR> to confirm completion
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
 " Vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
 
