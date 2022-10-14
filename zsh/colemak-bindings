@@ -21,7 +21,3 @@ bindkey -M vicmd "u" undo
 bindkey -M vicmd "U" redo
 bindkey -M vicmd "^?" backward-delete-char
 bindkey -M vicmd "^[[3~" delete-char
-
-# Keep ctrl+r searching
-bindkey -M viins '^R' history-incremental-pattern-search-forward
-bindkey -M viins '^r' history-incremental-pattern-search-backward
