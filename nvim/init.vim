@@ -71,7 +71,7 @@ nnoremap gb <Cmd>FzfBuffers<CR>
 nnoremap gh <Cmd>FzfHistory<CR>
 nnoremap <C-w>/ <Cmd>FzfWindows<CR>
 nnoremap <leader>rg <Cmd>FzfRg<CR>
-nnoremap <leader>,<space> <Cmd>FzfMaps<CR>
+nnoremap <leader><leader><space> <Cmd>FzfMaps<CR>
 
 " Copy and paste shortcut
 nnoremap <Space>c "+yy
@@ -116,8 +116,8 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
-" Use [[ to show documentation in preview window.
-nnoremap <silent> [[ :call <SID>show_documentation()<CR>
+" Use ,,t to show documentation in preview window.
+nnoremap <silent> <leader><leader>t :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -133,6 +133,9 @@ nnoremap <leader>r <Plug>(coc-rename)
 " Formatting selected code.
 xnoremap <leader>f <Plug>(coc-format)
 nnoremap <leader>f <Plug>(coc-format)
+
+" Use <CR> to confirm completion
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 
 " Vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
