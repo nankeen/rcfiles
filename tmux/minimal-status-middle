@@ -57,6 +57,11 @@ bind q killp
 # Kill window (prefix Ctrl+q)
 bind ^q killw
 
+# Splitting and new windows to current path
+bind '"' split-window -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
+
 #-- statusbar --#
 set -g status-justify centre
 set -g status-left "#[fg=red]s#S:w#I.p#P#[default]"
