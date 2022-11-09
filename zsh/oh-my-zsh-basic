@@ -15,4 +15,4 @@ plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
-source /usr/share/fzf/shell/key-bindings.zsh
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh

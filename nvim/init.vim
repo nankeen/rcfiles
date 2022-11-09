@@ -1,6 +1,6 @@
 call plug#begin()
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
 
 Plug 'majutsushi/tagbar'
 
@@ -26,9 +26,9 @@ Plug 'sheerun/vim-polyglot'
 
 Plug 'puremourning/vimspector'
 
-Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
-Plug 'lotabout/skim.vim'
+Plug 'junegunn/fzf.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -96,47 +96,6 @@ set shortmess+=c
 " diagnostics appear/become resolved.
 set signcolumn=yes
 
-" Use `[g` and `]g` to navigate diagnostics
-nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
-nnoremap <silent> <Space><CR> <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> g[ <Plug>(coc-type-definition)
-nnoremap <silent> gD <Plug>(coc-implementation)
-nnoremap <silent> gr <Plug>(coc-references)
-
-" Coc commands
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" " Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
-
-" Use ,,t to show documentation in preview window.
-nnoremap <silent> <leader><leader>t :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Symbol renaming.
-nnoremap <leader>r <Plug>(coc-rename)
-
-" Formatting selected code.
-xnoremap <leader>f <Plug>(coc-format)
-nnoremap <leader>f <Plug>(coc-format)
-
-" Use <CR> to confirm completion
-inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-
 " Vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
 
@@ -149,3 +108,57 @@ nnoremap <leader>do :VimspectorShowOutput
 nnoremap - :Explore<CR>
 
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-go', 'CodeLLDB' ] 
+
+lua << EOF
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gD', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', '<leader><leader>t', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<leader><leader>T', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<leader>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
+  vim.keymap.set('n', 'g[', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+end
+
+require('lspconfig').pyright.setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+require('lspconfig').tsserver.setup{
+    on_attach = on_attach,
+}
+require('lspconfig').rust_analyzer.setup{
+    on_attach = on_attach,
+}
+require'lspconfig'.hls.setup{
+    on_attach = on_attach,
+}
+require'lspconfig'.ocamllsp.setup{
+    on_attach = on_attach,
+}
+
+EOF
