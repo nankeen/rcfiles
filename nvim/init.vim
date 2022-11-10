@@ -144,14 +144,14 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
-require('lspconfig').pyright.setup{
+require'lspconfig'.pyright.setup{
     on_attach = on_attach,
     flags = lsp_flags,
 }
-require('lspconfig').tsserver.setup{
+require'lspconfig'.tsserver.setup{
     on_attach = on_attach,
 }
-require('lspconfig').rust_analyzer.setup{
+require'lspconfig'.rust_analyzer.setup{
     on_attach = on_attach,
 }
 require'lspconfig'.hls.setup{
@@ -160,5 +160,7 @@ require'lspconfig'.hls.setup{
 require'lspconfig'.ocamllsp.setup{
     on_attach = on_attach,
 }
-
+require'lspconfig'.clangd.setup{
+		on_attach = on_attach,
+}
 EOF
