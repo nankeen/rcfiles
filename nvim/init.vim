@@ -30,6 +30,14 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 Plug 'junegunn/fzf.vim'
 
+Plug 'hrsh7th/nvim-cmp' " Autocompletion plugin
+
+Plug 'hrsh7th/cmp-nvim-lsp' " LSP source for nvim-cmp
+
+Plug 'saadparwaiz1/cmp_luasnip' " Snippets source for nvim-cmp
+
+Plug 'L3MON4D3/LuaSnip' " Snippets plugin
+
 " Initialize plugin system
 call plug#end()
 
@@ -83,7 +91,6 @@ nmap ]b :bnext<CR>
 nmap [b :bprevious<CR>
 nmap <leader>bd :bdelete<cr>  
 
-" === CoC ===
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
@@ -108,6 +115,10 @@ nnoremap - :Explore<CR>
 
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-go', 'CodeLLDB' ] 
 
+" Required for autocompletion
+set completeopt=menu,menuone,noselect
+
+" VIM LSP
 lua << EOF
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -162,4 +173,25 @@ require'lspconfig'.ocamllsp.setup{
 require'lspconfig'.clangd.setup{
 		on_attach = on_attach,
 }
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      require'luasnip'.lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.abort(),
+		['<CR>'] = cmp.mapping.confirm({ select = true }),
+  }),
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+})
 EOF
