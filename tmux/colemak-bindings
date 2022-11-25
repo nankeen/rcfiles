@@ -1,3 +1,13 @@
+# Colemak cycling
+unbind m
+unbind n
+unbind e
+unbind i
+bind-key m select-pane -L
+bind-key n select-pane -D
+bind-key e select-pane -U
+bind-key i select-pane -R
+
 bind-key -T copy-mode-vi m send-keys -X cursor-left
 bind-key -T copy-mode-vi n send-keys -X cursor-down
 bind-key -T copy-mode-vi e send-keys -X cursor-up
