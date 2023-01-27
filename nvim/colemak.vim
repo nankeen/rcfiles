@@ -3,12 +3,12 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MNEI arrows.
 noremap m h|noremap n j|noremap e k|noremap i l|noremap gn gj|noremap ge gk
-" In(s)ert. The default s/S is synonymous with cl/cc and is not very useful.
-noremap s i|noremap S I
+" Undo in the same location as u
+noremap l u
+" Insert same place as insert.
+noremap u i|noremap U I
 " Last search.
 noremap k n|noremap K N
-" BOL/EOL/Join Lines.
-noremap l ^|noremap L $|noremap <C-l> J
 " _r_ = inneR text objects.
 onoremap r i
 " End of word.
