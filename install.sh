@@ -19,6 +19,12 @@ if [ -f $HOME/.tmux.conf ]; then
 fi
 echo "source $SCRIPT_DIR/tmux/minimal-status-middle" > $HOME/.tmux.conf
 
+# Install emacs configs
+if [ -f $HOME/.spacemacs ]; then
+    cp $HOME/.spacemacs $HOME/.spacemacs.bak
+fi
+ln -s $SCRIPT_DIR/emacs/spacemacs $HOME/.spacemacs
+
 # Install VIM plug for NeoVIM
 curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 mkdir -p $HOME/.config/nvim/
@@ -30,6 +36,7 @@ if $INSTALL_COLEMAK; then
 	echo "source $SCRIPT_DIR/tmux/colemak-bindings" >> $HOME/.tmux.conf
 	echo "source $SCRIPT_DIR/nvim/colemak.vim" >> $HOME/.config/nvim/init.vim
 fi
+
 
 # Configure git
 git config --global init.defaultBranch main
