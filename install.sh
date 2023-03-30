@@ -7,36 +7,46 @@ INSTALL_COLEMAK=true
 # Link script dir to home directory
 ln -s $CUR_DIR $SCRIPT_DIR
 
+# Install bashrc
+if [ -f $HOME/.bashrc ]; then
+	cp $HOME/.bashrc $HOME/.bashrc.bak
+fi
+ln -s $SCRIPT_DIR/.bashrc $HOME/.bashrc 
+
 # Install zshrc
 if [ -f $HOME/.zshrc ]; then
 	cp $HOME/.zshrc $HOME/.zshrc.bak
 fi
-echo "source $SCRIPT_DIR/zsh/oh-my-zsh-basic" > $HOME/.zshrc
+ln -s $SCRIPT_DIR/.zshrc $HOME/.zshrc
 
 # Install tmux configs
 if [ -f $HOME/.tmux.conf ]; then
 	cp $HOME/.tmux.conf $HOME/.tmux.conf.bak
 fi
-echo "source $SCRIPT_DIR/tmux/minimal-status-middle" > $HOME/.tmux.conf
+ln -s $SCRIPT_DIR/.tmux.conf $HOME/.tmux.conf
 
-# Install emacs configs
-if [ -f $HOME/.spacemacs ]; then
-    cp $HOME/.spacemacs $HOME/.spacemacs.bak
+# Install spacemacs
+if [ ! -d $HOME/.emacs.d ]; then
+	git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
 fi
-ln -s $SCRIPT_DIR/emacs/spacemacs $HOME/.spacemacs
+
+# Install spacemacs configs
+if [ -f $HOME/.spacemacs ]; then
+	cp $HOME/.spacemacs $HOME/.spacemacs.bak
+fi
+ln -s $SCRIPT_DIR/.spacemacs $HOME/.spacemacs
 
 # Install VIM plug for NeoVIM
-curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-mkdir -p $HOME/.config/nvim/
-echo "source $SCRIPT_DIR/nvim/init.vim" > $HOME/.config/nvim/init.vim
-
-# Optional Colemak bindings
-if $INSTALL_COLEMAK; then
-	echo "source $SCRIPT_DIR/zsh/colemak-bindings" >> $HOME/.zshrc
-	echo "source $SCRIPT_DIR/tmux/colemak-bindings" >> $HOME/.tmux.conf
-	echo "source $SCRIPT_DIR/nvim/colemak.vim" >> $HOME/.config/nvim/init.vim
+if [ ! -f "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim ]; then
+	curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	mkdir -p $HOME/.config/nvim/
 fi
 
+# Install neovim configs
+if [ -f $HOME/.config/nvim/init.vim ]; then
+	cp $HOME/.config/nvim/init.vim $HOME/.config/nvim/init.vim.bak
+fi
+ln -s $SCRIPT_DIR/.config/nvim/init.vim $HOME/.config/nvim/init.vim
 
 # Configure git
 git config --global init.defaultBranch main
