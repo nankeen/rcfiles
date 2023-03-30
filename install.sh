@@ -9,19 +9,19 @@ ln -s $CUR_DIR $SCRIPT_DIR
 
 # Install bashrc
 if [ -f $HOME/.bashrc ]; then
-	cp $HOME/.bashrc $HOME/.bashrc.bak
+	mv $HOME/.bashrc $HOME/.bashrc.bak
 fi
 ln -s $SCRIPT_DIR/.bashrc $HOME/.bashrc 
 
 # Install zshrc
 if [ -f $HOME/.zshrc ]; then
-	cp $HOME/.zshrc $HOME/.zshrc.bak
+	mv $HOME/.zshrc $HOME/.zshrc.bak
 fi
 ln -s $SCRIPT_DIR/.zshrc $HOME/.zshrc
 
 # Install tmux configs
 if [ -f $HOME/.tmux.conf ]; then
-	cp $HOME/.tmux.conf $HOME/.tmux.conf.bak
+	mv $HOME/.tmux.conf $HOME/.tmux.conf.bak
 fi
 ln -s $SCRIPT_DIR/.tmux.conf $HOME/.tmux.conf
 
@@ -32,7 +32,7 @@ fi
 
 # Install spacemacs configs
 if [ -f $HOME/.spacemacs ]; then
-	cp $HOME/.spacemacs $HOME/.spacemacs.bak
+	mv $HOME/.spacemacs $HOME/.spacemacs.bak
 fi
 ln -s $SCRIPT_DIR/.spacemacs $HOME/.spacemacs
 
@@ -44,7 +44,7 @@ fi
 
 # Install neovim configs
 if [ -f $HOME/.config/nvim/init.vim ]; then
-	cp $HOME/.config/nvim/init.vim $HOME/.config/nvim/init.vim.bak
+	mv $HOME/.config/nvim/init.vim $HOME/.config/nvim/init.vim.bak
 fi
 ln -s $SCRIPT_DIR/.config/nvim/init.vim $HOME/.config/nvim/init.vim
 
