@@ -4,6 +4,14 @@ set editing-mode vi
 
 set show-mode-in-prompt on
 
+set match-hidden-files off
+
+# Enable prompt colours
+
+set colored-completion-prefix on
+
+set colored-stats on
+
 $if mode=vi
 
 	set keymap vi-command
