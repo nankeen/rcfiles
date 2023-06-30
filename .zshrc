@@ -16,25 +16,3 @@ plugins=(git vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
-
-####################################################################################################
-# Vi Mode
-####################################################################################################
-bindkey -v
-# Colemak.
-bindkey -M vicmd "m" backward-char
-bindkey -M vicmd "n" down-line-or-history
-bindkey -M vicmd "e" up-line-or-history
-bindkey -M vicmd "i" forward-char
-bindkey -M vicmd "u" vi-insert
-bindkey -M vicmd "U" vi-insert-bol
-bindkey -M vicmd "k" vi-repeat-search
-bindkey -M vicmd "K" vi-rev-repeat-search
-bindkey -M vicmd "j" vi-forward-word-end
-bindkey -M vicmd "J" vi-forward-blank-word-end
-
-# Sane Undo, Redo, Backspace, Delete.
-bindkey -M vicmd "l" undo
-bindkey -M vicmd "L" redo
-bindkey -M vicmd "^?" backward-delete-char
-bindkey -M vicmd "^[[3~" delete-char

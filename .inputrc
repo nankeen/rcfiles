@@ -26,13 +26,6 @@ $if mode=vi
 	Control-y: yank
 	Control-p: previous-history
 	Control-n: next-history
-	m: backward-char
-	n: next-history
-	e: previous-history
-	i: forward-char
-	f: end-of-word
-	u: vi-insertion-mode
-	l: vi-undo
 
 	set keymap vi-insert
 	Control-a: beginning-of-line
