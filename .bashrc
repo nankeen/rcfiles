@@ -36,3 +36,5 @@ export PATH
 . "$HOME/.cargo/env"
 
 [ -f "/home/kai/.ghcup/env" ] && source "/home/kai/.ghcup/env" # ghcup-env
+
+[ -f "/home/kai/.opam/opam-init/init.sh" ] && source "/home/kai/.opam/opam-init/init.sh" # Opam

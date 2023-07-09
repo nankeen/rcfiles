@@ -54,7 +54,7 @@ This function should only modify configuration layer settings."
      syntax-checking
      version-control
      treemacs
-     rust
+     (rust :variables rust-format-on-save t)
      c-c++
      python
      ocaml
@@ -584,6 +584,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (setq-default evil-symbol-word-search t)
 )
 
 
