@@ -8,9 +8,8 @@ The following are required for the dotfiles to work
 
 * neovim
 * tmux
-* zsh
-* oh my zsh
 
 ```bash
-./install.sh
+stow --target $HOME home
+stow --target $XDG_CONFIG_HOME xdg_config_home
 ```
