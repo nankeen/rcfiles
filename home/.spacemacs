@@ -37,29 +37,38 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     go
      auto-completion
      better-defaults
+     c-c++
+     coq
      emacs-lisp
      git
+     go
      helm
-     
+     html
+     (javascript :variables js-indent-level 2)
+     (json :variables js-indent-level 2)
+     (lsp :variables lsp-rust-server 'rust-analyzer)
+     latex
      markdown
      multiple-cursors
-     ;; org
+     ocaml
+     (org :variables
+          org-enable-roam-support t
+          org-adapt-indentation t)
+     (python :variables
+             python-backend 'lsp
+             python-lsp-server 'pyright
+             python-formatter 'yapf)
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     spell-checking
-     syntax-checking
-     version-control
-     treemacs
      (rust :variables rust-format-on-save t)
-     c-c++
-     python
-     ocaml
-     coq
-     (json :variables js-indent-level 2)
+     spell-checking
+     swift
+     syntax-checking
+     (terraform :variables terraform-auto-format-on-save t)
+     treemacs
      (typescript :variables
                  typescript-fmt-on-save t
                  typescript-fmt-tool 'typescript-formatter
@@ -67,9 +76,9 @@ This function should only modify configuration layer settings."
                  typescript-linter 'eslint
                  typescript-lsp-linter nil
                  typescript-indent-level 4)
-     (javascript :variables js-indent-level 2)
-     html
-     (lsp :variables lsp-rust-server 'rust-analyzer))
+     version-control
+     yaml)
+
 
 
    ;; List of additional packages that will be installed without being wrapped
@@ -585,6 +594,8 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq-default evil-symbol-word-search t)
+  (require epa-file)
+  (epa-file-enable)
 )
 
 
