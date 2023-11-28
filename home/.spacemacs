@@ -76,7 +76,8 @@ This function should only modify configuration layer settings."
                  typescript-linter 'eslint
                  typescript-lsp-linter nil
                  typescript-indent-level 4)
-     version-control
+     (version-control :variables
+                       version-control-diff-tool 'diff-hl)
      yaml)
 
 
@@ -596,7 +597,6 @@ before packages are loaded."
   (setq-default evil-symbol-word-search t)
   (require epa-file)
   (epa-file-enable)
-  (prefer-coding-system 'utf-8)
 )
 
 
