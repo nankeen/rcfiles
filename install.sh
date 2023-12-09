@@ -10,7 +10,7 @@ fi
 # Install VIM plug for NeoVIM
 if [ ! -f "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim ]; then
 	curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	mkdir -p $HOME/.config/nvim/
+	mkdir -p $XDG_CONFIG_HOME/nvim/
 fi
 
 # Configure git
@@ -20,4 +20,4 @@ git config --global user.name "Kai"
 
 # Install rcfiles
 stow --target $HOME home
-stow --target $XDG_CONFIG_HOME
+stow --target $XDG_CONFIG_HOME xdg_config_home
