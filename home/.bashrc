@@ -39,6 +39,8 @@ export PATH
 # User specific aliases and functions
 . "$HOME/.cargo/env"
 
-[ -f "/home/kai/.ghcup/env" ] && source "/home/kai/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
-[ -f "/home/kai/.opam/opam-init/init.sh" ] && source "/home/kai/.opam/opam-init/init.sh" # Opam
+[ -f "$HOME/.opam/opam-init/init.sh" ] && source "$HOME/.opam/opam-init/init.sh" # Opam
+
+[ -f "$HOME/.elan/env" ] && source $HOME/.elan/env
