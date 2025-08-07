@@ -23,7 +23,11 @@ fi
 set -o vi
 
 # fzf bash
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ -f ~/.fzf.bash ]; then 
+	source ~/.fzf.bash 
+elif [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
+	source /usr/share/doc/fzf/examples/key-bindings.bash
+fi
 
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
@@ -35,6 +39,8 @@ export PATH
 # User specific aliases and functions
 . "$HOME/.cargo/env"
 
-[ -f "/home/kai/.ghcup/env" ] && source "/home/kai/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
-[ -f "/home/kai/.opam/opam-init/init.sh" ] && source "/home/kai/.opam/opam-init/init.sh" # Opam
+[ -f "$HOME/.opam/opam-init/init.sh" ] && source "$HOME/.opam/opam-init/init.sh" # Opam
+
+[ -f "$HOME/.elan/env" ] && source $HOME/.elan/env
